@@ -1,0 +1,6 @@
+102a98,99
+>     {0, XK_J, i_navigate, +1},
+>     {0, XK_K, i_navigate, -1},
+124,125d120
+< 	{ 0,            XK_J,             i_scroll_to_edge,     DIR_DOWN },
+< 	{ 0,            XK_K,             i_scroll_to_edge,     DIR_UP },
