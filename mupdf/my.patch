@@ -1,0 +1,91 @@
+765c767
+< 			sprintf(buf, "...%s%s - %d/%d", title + n - 50, extra, currentpage.page + 1,
+---
+> 			sprintf(buf, "...%s%s - %d/%d - MuPDF", title + n - 50, extra, currentpage.page + 1,
+768,769c770,771
+< 			sprintf(buf, "...%s%s - %d/%d - %d/%d", title + n - 50, extra, currentpage.chapter + 1, nc,
+< 			        currentpage.page + 1, fz_count_chapter_pages(ctx, doc, currentpage.chapter));
+---
+> 			sprintf(buf, "...%s%s - %d/%d - %d/%d - MuPDF", title + n - 50, extra, currentpage.chapter + 1,
+> 			        nc, currentpage.page + 1, fz_count_chapter_pages(ctx, doc, currentpage.chapter));
+772c774,775
+< 			sprintf(buf, "%s%s - %d/%d", title, extra, currentpage.page + 1, fz_count_pages(ctx, doc));
+---
+> 			sprintf(buf, "%s%s - %d/%d - MuPDF", title, extra, currentpage.page + 1,
+> 			        fz_count_pages(ctx, doc));
+775c778
+< 			sprintf(buf, "%s%s - %d/%d - %d/%d", title, extra, currentpage.chapter + 1, nc,
+---
+> 			sprintf(buf, "%s%s - %d/%d - %d/%d - MuPDF", title, extra, currentpage.chapter + 1, nc,
+1768a1773
+> // Original
+1789a1795,1822
+> static void move_backward(void)
+> {
+> 	int slop_y = page_tex.h / 20;
+> 	if (scroll_y <= slop_y) {
+> 		fz_location prev = fz_previous_page(ctx, doc, currentpage);
+> 		if (!eqloc(currentpage, prev)) {
+> 			scroll_y    = (page_tex.h <= canvas_h) ? 0 : page_tex.h - canvas_h;
+> 			currentpage = prev;
+> 		}
+> 	} else {
+> 		scroll_y -= canvas_h * 9 / 10;
+> 	}
+> }
+> 
+> static void move_forward(void)
+> {
+> 	int slop_y = page_tex.h / 20;
+> 	if (scroll_y + canvas_h >= page_tex.h - slop_y) {
+> 		fz_location next = fz_next_page(ctx, doc, currentpage);
+> 		if (!eqloc(currentpage, next)) {
+> 			scroll_y    = 0;
+> 			currentpage = next;
+> 		}
+> 	} else {
+> 		scroll_y += canvas_h * 9 / 10;
+> 	}
+> }
+> 
+1855c1888
+< 		case 'u':
+---
+> 		case 'M':
+1898,1900c1931,1933
+< 		case 'f':
+< 			toggle_fullscreen();
+< 			break;
+---
+> 		/* case 'f': */
+> 		/*   toggle_fullscreen(); */
+> 		/*   break; */
+1944a1978,1987
+> 		case 'u':
+> 			number = fz_maxi(number, 1);
+> 			while (number--)
+> 				move_backward();
+> 			break;
+> 		case 'd':
+> 			number = fz_maxi(number, 1);
+> 			while (number--)
+> 				move_forward();
+> 			break;
+1950c1993
+< 		case ' ':
+---
+> 		case 'f':
+1962c2005
+< 		case ',':
+---
+> 		case 'K':
+1968c2011
+< 		case '.':
+---
+> 		case 'J':
+2449c2492,2494
+< 		glClearColor(0.3f, 0.3f, 0.3f, 1);
+---
+> 		// Set the default background color here
+> 		// Floats = rgb/255
+> 		glClearColor(0.0f, 0.17f, 0.21f, 1);
