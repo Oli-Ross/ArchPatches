@@ -1,0 +1,6 @@
+#!/bin/bash
+
+chmod 666 /tmp/pacman_updates
+chmod 666 /tmp/aur_updates
+/usr/bin/checkupdates 2>/dev/null | wc -l > /tmp/pacman_updates
+/usr/bin/pacman -Qum 2>/dev/null | wc -l > /tmp/aur_updates

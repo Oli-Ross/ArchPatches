@@ -1,0 +1,12 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove 
+Type = Package
+Target = *
+
+[Action]
+Depends = pacman-contrib
+Description = "Update /tmp files containing info on the current pacman status."
+When = PostTransaction
+Exec = "/usr/bin/count_upgradable_packages"
