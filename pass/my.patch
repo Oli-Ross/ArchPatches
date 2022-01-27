@@ -1,4 +1,9 @@
-10,15c10,11
+5,15c5,6
+< typeit=0
+< if [[ $1 == "--type" ]]; then
+< 	typeit=1
+< 	shift
+< fi
 < 
 < if [[ -n $WAYLAND_DISPLAY ]]; then
 < 	dmenu=dmenu-wl
@@ -7,15 +12,21 @@
 < 	dmenu=dmenu
 ---
 > if [[ -n $DISPLAY ]]; then
-> 	dmenu="rofi -dmenu -i"
-18c14
+> 	rofi="rofi -dmenu -i"
+18c9
 < 	echo "Error: No Wayland or X11 display detected" >&2
 ---
 > 	echo "Error: No X11 display detected" >&2
-27c23
+27c18
 < password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "$@")
 ---
-> password=$(printf '%s\n' "${password_files[@]}" | $dmenu "$@")
-33a30,31
+> password=$(printf '%s\n' "${password_files[@]}" | $rofi "$@")
+31,32c22,23
+< if [[ $typeit -eq 0 ]]; then
+< 	pass show -c "$password" 2>/dev/null
+---
+> if [[ $1 == "--otp" ]]; then
+> 	pass otp "$password" | $xdotool
+33a25,26
 > 	pass show "$password" | grep 'login' | sed 's/login: \(.*\)$/\1/g' | $xdotool 
 > 	xdotool key "Tab"
