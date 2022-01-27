@@ -1,0 +1,18 @@
+# Maintainer: Lukas Fleischer <lfleischer@archlinux.org>
+# Contributor: Simon Zimmermann <simon@insmo.com>
+# Contributor: Daniel M. Capella <polyzen@archlinux.org>
+
+pkgname='pass-select'
+pkgver=1
+pkgrel=1
+pkgdesc='Selects password file via fzf'
+arch=('any')
+license=('GPL2')
+depends=('pass' 'fzf')
+source=("select.bash")
+sha256sums=('SKIP')
+
+package() {
+  cd "${srcdir}"
+  install -Dm0755 -t "${pkgdir}/usr/lib/password-store/extensions" select.bash
+}
