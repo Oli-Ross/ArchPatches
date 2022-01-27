@@ -24,7 +24,7 @@ conflicts=('passmenu')
 source=("https://git.zx2c4.com/password-store/snapshot/password-store-${pkgver}.tar.xz"
 	'my.patch')
 sha256sums=('cfa9faf659f2ed6b38e7a7c3fb43e177d00edbacc6265e6e32215ff40e3793c0'
-	'ee9a760073e398e1687dd4108da400f0822a6a94ae324726318b8904b7949c59')
+	'c39a9aa5ff1c724070fd71c8707b0a80f39fb63dd5d54ab3f9a45e2d9a8048e0')
 
 check() {
   cd "${srcdir}/password-store-$pkgver/"
