@@ -8,6 +8,8 @@ Some of the PKGBUILDS have been pulled from the AUR and modified.
   scrolling anymore, but custom scrolling (simply up and down and across pages).
 * `pass`: Patch `passmenu`, so that it also outputs the username. If you use
   `passmenu --otp` it outpus the current OTP code instead.
+  (Beware that `pass` then technically depends on `pass-otp`, since `passmenu`
+  is part of `pass`)
 * `slock`: Solarized colors
 * `sxiv`: Solarized `base3` background. Changed shortcuts
 * `taskwarrior_solarized`: Use [this theme](https://github.com/hpainter/taskwarrior-solarized) for taskwarrior
