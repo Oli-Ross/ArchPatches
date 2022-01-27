@@ -6,7 +6,8 @@ Some of the PKGBUILDS have been pulled from the AUR and modified.
 
 * `mupdf`: Solarized `base3` background. `d`/`u` shortcuts don't use smart
   scrolling anymore, but custom scrolling (simply up and down and across pages).
-* `pass`: Patch `passmenu`, so that it also outputs the username
+* `pass`: Patch `passmenu`, so that it also outputs the username. If you use
+  `passmenu --otp` it outpus the current OTP code instead.
 * `slock`: Solarized colors
 * `sxiv`: Solarized `base3` background. Changed shortcuts
 * `taskwarrior_solarized`: Use [this theme](https://github.com/hpainter/taskwarrior-solarized) for taskwarrior
