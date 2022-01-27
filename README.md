@@ -12,3 +12,4 @@ Some of the PKGBUILDS have been pulled from the AUR and modified.
 * `taskwarrior_solarized`: Use [this theme](https://github.com/hpainter/taskwarrior-solarized) for taskwarrior
 * `update_hooks`: Installs a .hook-file which writes the number of upgradable
   packages to a file in `/tmp` after every `pacman` operation
+* `pass-select`: Extension for `pass` password manager to select entry with `fzf`
