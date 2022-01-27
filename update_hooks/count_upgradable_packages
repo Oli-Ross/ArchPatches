@@ -1,9 +1,15 @@
 #!/bin/bash
 
 PAC="/tmp/pacman_updates"
-AUR="/tmp/aur_updates"
 
-/usr/bin/checkupdates 2>/dev/null | wc -l > "$PAC"
-/usr/bin/pacman -Qum 2>/dev/null | wc -l > "$AUR"
-chmod 666 "$PAC"
-chmod 666 "$AUR"
+process_file(){
+	if ! [[ -f $1 ]]; then
+		touch $1
+	fi
+	chown root $1
+	chmod 0666 $1
+}
+
+process_file "$PAC"
+
+checkupdates | wc -l > "$PAC"

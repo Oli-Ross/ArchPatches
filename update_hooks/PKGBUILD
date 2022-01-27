@@ -8,8 +8,8 @@ arch=('x86_64')
 license=('AGPL3')
 source=("count_upgradable_packages.hook"
 	"count_upgradable_packages")
-sha256sums=("c8f724b1fe61bd176caf0e30a6c19e8b3f1403027b50cd9fd554d2b103616fe7"
-	    "2fd38c2dc7add1db178f4e252fdcb7ebe6109958e4e4003ea7f8d04e860048ea")
+sha256sums=("f56fa06f973d4b8a4fbf8cfbb80b5d2c129f81437efad2f0def1e6db49b00b16"
+	    "66a155aef8b8adc869d316b4d3b4524a2a127116232978e9b047cde32b120e07")
 
 package() {
   pkgdesc='Hooks that are run after a pacman upgrade.'
