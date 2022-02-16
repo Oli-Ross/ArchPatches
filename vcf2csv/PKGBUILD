@@ -1,0 +1,17 @@
+# Maintainer: Oliver Roß <mail@oliver-ross.at>
+
+pkgname=vcf2csv
+pkgver=0.6
+pkgrel=1
+pkgdesc="Convert vcard data into csv format "
+arch=('x86_64')
+url="http://vcf2csv.sourceforge.net/"
+license=('GPL3')
+source=("https://sourceforge.net/projects/vcf2csv/files/vcf2csv/vcf2csv-0.6/vcf2csv-0.6-201011061941-src-bin.tgz")
+sha512sums=('843f571e6deea53da0bf782f5a7f6a295ca352d9557773d64fc448ac7955dce69f100d6190886c6d49305f49959ecb0ff27617a239eafcb8d1bfedb3e0ea4a32')
+
+package() {
+  install -D vcf2csv-0.6-201011061941-src-bin/vcf2csv "${pkgdir}/usr/bin/vcf2csv"
+  cat vcf2csv-0.6-201011061941-src-bin/src/vcf2csv.1 | gzip > vcf2csv.1.gz
+  install -Dm644 vcf2csv.1.gz "${pkgdir}/usr/share/man/man1/vcf2csv.1.gz"
+}
