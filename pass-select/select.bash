@@ -15,4 +15,9 @@ password=$(printf '%s\n' "${password_files[@]}" | fzf)
 
 [[ -n $password ]] || exit
 
-pass show "$password" 2>/dev/null
+if [[ $1 == "-c" ]];then
+	pass show -c "$password" 2>/dev/null
+else
+	pass show "$password" 2>/dev/null
+fi
+
