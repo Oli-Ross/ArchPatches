@@ -1,0 +1,29 @@
+3,4c3,4
+< static int borderpx = 0;
+< static char font[] = "monospace:size=10";
+---
+> static int borderpx = 20;
+> static char font[] = "DejaVuSansMono Nerd Font Mono:size=12";
+10,13c10,13
+< struct g px = {0};
+< struct g py = {0};
+< struct g tx = {0};
+< struct g ty = {0};
+---
+> struct g px = {00};
+> struct g py = {00};
+> struct g tx = {00};
+> struct g ty = {00};
+19c19
+< static char *colors[2] = { "#000000", "#dddddd" };
+---
+> static char *colors[2] = { "#fdf6e3", "#002b36" };
+24c24
+< static int period = 5;
+---
+> static int period = 0;
+31c31
+< static bool window_on_top = 0;
+\ No newline at end of file
+---
+> static bool window_on_top = 1;
