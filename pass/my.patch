@@ -20,7 +20,7 @@
 27c18
 < password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "$@")
 ---
-> password=$(printf '%s\n' "${password_files[@]}" | $rofi "$@")
+> password=$(printf '%s\n' "${password_files[@]}" | grep -v trash | $rofi "$@")
 31,32c22,23
 < if [[ $typeit -eq 0 ]]; then
 < 	pass show -c "$password" 2>/dev/null
