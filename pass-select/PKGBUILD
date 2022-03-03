@@ -10,7 +10,7 @@ arch=('any')
 license=('GPL2')
 depends=('pass' 'fzf')
 source=("select.bash")
-sha256sums=('afe22356d82364de80418467b154821d0fe4c399ae9c6bf3f21d4f1773cb4298')
+sha256sums=('dcd6a54a2ce73d340223385cb7e6ee7af1efa7447797219feeca7f05a71fb56d')
 
 package() {
   cd "${srcdir}"

@@ -11,7 +11,7 @@ password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
 # Select password
-password=$(printf '%s\n' "${password_files[@]}" | fzf)
+password=$(printf '%s\n' "${password_files[@]}" | grep -v trash | fzf)
 
 [[ -n $password ]] || exit
 
