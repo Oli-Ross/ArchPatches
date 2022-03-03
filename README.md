@@ -17,3 +17,4 @@ Some of the PKGBUILDS have been pulled from the AUR and modified.
   packages to a file in `/tmp` after every `pacman` operation
 * `pass-select`: Extension for `pass` password manager to select entry with `fzf`
 * `vcf2csv`: No changes made, just packaging upstream binary for arch.
+* `stw`: Simple text widget for X, adapted for fullscreen on my screen
