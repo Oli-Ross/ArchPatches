@@ -1,0 +1,31 @@
+# Maintainer: Oliver Roß < mail at oliver-ross dot at >
+
+pkgname=stw
+pkgver=1.0
+pkgrel=1
+pkgdesc="A simple text widget for X"
+arch=('x86_64')
+license=('MIT')
+depends=('libx11' 'libxft')
+source=("git+https://github.com/sineemore/stw"
+	"config.patch"
+	"fullscreen.patch")
+sha256sums=('SKIP'
+            '7bbb5be2866b0bfb304c6adf0474cf94199f0ed1c9474f2ad064e7dfd0c9eb08'
+            '92cb2821408f9725e943d800db7ccc59d94e930b417696c74fad3cb47df6dce3')
+
+prepare() {
+  cd "stw"
+  patch config.h ../config.patch
+  patch stw.c ../fullscreen.patch
+}
+
+build() {
+  cd "stw"
+  make
+}
+
+package() {
+  cd "stw"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+}

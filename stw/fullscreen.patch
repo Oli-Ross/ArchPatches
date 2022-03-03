@@ -1,0 +1,6 @@
+186,187c186,187
+< 	window_width += borderpx * 2;
+< 	window_height += borderpx * 2;
+---
+> 	window_width = 1366;
+> 	window_height = 768;
