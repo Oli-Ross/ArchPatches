@@ -21,12 +21,14 @@
 < password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "$@")
 ---
 > password=$(printf '%s\n' "${password_files[@]}" | grep -v trash | $rofi "$@")
-31,32c22,23
+31,32c22,25
 < if [[ $typeit -eq 0 ]]; then
 < 	pass show -c "$password" 2>/dev/null
 ---
 > if [[ $1 == "--otp" ]]; then
 > 	pass otp "$password" | $xdotool
-33a25,26
+> elif [[ $1 == "--passonly" ]]; then
+> 	pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } | $xdotool
+33a27,28
 > 	pass show "$password" | grep 'login' | sed 's/login: \(.*\)$/\1/g' | $xdotool 
 > 	xdotool key "Tab"
