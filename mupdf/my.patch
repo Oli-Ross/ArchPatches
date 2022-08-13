@@ -1,25 +1,20 @@
-765c767
-< 			sprintf(buf, "...%s%s - %d/%d", title + n - 50, extra, currentpage.page + 1,
+794c794
+< 			sprintf(buf, "...%s%s - %d/%d", title + n - 50, extra, currentpage.page + 1, fz_count_pages(ctx, doc));
 ---
-> 			sprintf(buf, "...%s%s - %d/%d - MuPDF", title + n - 50, extra, currentpage.page + 1,
-768,769c770,771
-< 			sprintf(buf, "...%s%s - %d/%d - %d/%d", title + n - 50, extra, currentpage.chapter + 1, nc,
-< 			        currentpage.page + 1, fz_count_chapter_pages(ctx, doc, currentpage.chapter));
+> 			sprintf(buf, "...%s%s - %d/%d - MuPDF", title + n - 50, extra, currentpage.page + 1, fz_count_pages(ctx, doc));
+796c796
+< 			sprintf(buf, "...%s%s - %d/%d - %d/%d", title + n - 50, extra,
 ---
-> 			sprintf(buf, "...%s%s - %d/%d - %d/%d - MuPDF", title + n - 50, extra, currentpage.chapter + 1,
-> 			        nc, currentpage.page + 1, fz_count_chapter_pages(ctx, doc, currentpage.chapter));
-772c774,775
+> 			sprintf(buf, "...%s%s - %d/%d - %d/%d - MuPDF", title + n - 50, extra,
+803c803
 < 			sprintf(buf, "%s%s - %d/%d", title, extra, currentpage.page + 1, fz_count_pages(ctx, doc));
 ---
-> 			sprintf(buf, "%s%s - %d/%d - MuPDF", title, extra, currentpage.page + 1,
-> 			        fz_count_pages(ctx, doc));
-775c778
-< 			sprintf(buf, "%s%s - %d/%d - %d/%d", title, extra, currentpage.chapter + 1, nc,
+> 			sprintf(buf, "%s%s - %d/%d - MuPDF", title, extra, currentpage.page + 1, fz_count_pages(ctx, doc));
+806c806
+< 			sprintf(buf, "%s%s - %d/%d - %d/%d", title, extra,
 ---
-> 			sprintf(buf, "%s%s - %d/%d - %d/%d - MuPDF", title, extra, currentpage.chapter + 1, nc,
-1768a1773
-> // Original
-1789a1795,1822
+> 			sprintf(buf, "%s%s - %d/%d - %d/%d - MuPDF", title, extra,
+1931a1932,1960
 > static void move_backward(void)
 > {
 > 	int slop_y = page_tex.h / 20;
@@ -48,44 +43,41 @@
 > 	}
 > }
 > 
-1855c1888
-< 		case 'u':
+> 
+1968c1997
+< 		case 'u': toggle_undo(); break;
 ---
-> 		case 'M':
-1898,1900c1931,1933
-< 		case 'f':
-< 			toggle_fullscreen();
-< 			break;
+> 		case 'M': toggle_undo(); break;
+1978a2008,2017
+>  		case 'u':
+>  			number = fz_maxi(number, 1);
+>  			while (number--)
+>  				move_backward();
+>  			break;
+>  		case 'd':
+>  			number = fz_maxi(number, 1);
+>  			while (number--)
+>  				move_forward();
+>  			break;
+1983c2022
+< 		case 'f': toggle_fullscreen(); break;
 ---
-> 		/* case 'f': */
-> 		/*   toggle_fullscreen(); */
-> 		/*   break; */
-1944a1978,1987
-> 		case 'u':
-> 			number = fz_maxi(number, 1);
-> 			while (number--)
-> 				move_backward();
-> 			break;
-> 		case 'd':
-> 			number = fz_maxi(number, 1);
-> 			while (number--)
-> 				move_forward();
-> 			break;
-1950c1993
-< 		case ' ':
+> 		// case 'f': toggle_fullscreen(); break;
+1999c2038
+< 		case ' ': number = fz_maxi(number, 1); while (number--) smart_move_forward(); break;
 ---
-> 		case 'f':
-1962c2005
-< 		case ',':
+> 		case 'f': number = fz_maxi(number, 1); while (number--) smart_move_forward(); break;
+2003c2042
+< 		case ',': case KEY_PAGE_UP:
 ---
-> 		case 'K':
-1968c2011
-< 		case '.':
+> 		case 'K': case KEY_PAGE_UP:
+2008c2047
+< 		case '.': case KEY_PAGE_DOWN:
 ---
-> 		case 'J':
-2449c2492,2494
+> 		case 'J': case KEY_PAGE_DOWN:
+2537c2576,2578
 < 		glClearColor(0.3f, 0.3f, 0.3f, 1);
 ---
-> 		// Set the default background color here
-> 		// Floats = rgb/255
-> 		glClearColor(0.0f, 0.17f, 0.21f, 1);
+>  		// Set the default background color here
+>  		// Floats = rgb/255
+>  		glClearColor(0.0f, 0.17f, 0.21f, 1);
