@@ -7,7 +7,7 @@
 
 pkgbase=mupdf
 pkgname=(libmupdf mupdf mupdf-gl mupdf-tools)
-pkgver=1.19.1
+pkgver=1.20.3
 pkgrel=2
 pkgdesc='Lightweight PDF and XPS viewer'
 arch=('x86_64')
@@ -15,14 +15,14 @@ url='https://mupdf.com/'
 license=('AGPL3')
 makedepends=('desktop-file-utils' 'freetype2' 'freeglut' 'glu' 'harfbuzz'
              'jbig2dec' 'libjpeg' 'mesa-libgl' 'openjpeg2' 'libxext'
-             'gumbo-parser' 'clang')
+             'gumbo-parser')
 # we need static libs for zathura-pdf-mupdf
 options=('staticlibs')
-source=("https://mupdf.com/downloads/archive/mupdf-${pkgver/_/}-source.tar.xz"
+source=("https://mupdf.com/downloads/archive/mupdf-${pkgver/_/}-source.tar.zst"
         'mupdf.desktop'
         'mupdf.xpm'
 	'my.patch')
-sha256sums=('b5eac663fe74f33c430eda342f655cf41fa73d71610f0884768a856a82e3803e'
+sha256sums=('108c4ad87d5cdd3ad47a3a872acdf101693283442469629dabb7631f1f3a0b3f'
             'ccff66979249bd4ab4ba8918660f194eb90eb0ae231b16e36a6cecdcf471883f'
             'a435f44425f5432c074dee745d8fbaeb879038ec1f1ec64f037c74662f09aca8'
             '75f900c2bd8ee90e3bfa8d239d642395aa2d72037f0424f513b6bf854d238a8f')
