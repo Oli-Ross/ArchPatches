@@ -1,36 +1,42 @@
-# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
-# Contributor: Sebastian A. Liem <sebastian at liem dot se>
-
 pkgname=slock
-pkgver=1.4
-pkgrel=5
-pkgdesc="A simple screen locker for X"
-arch=('x86_64')
-url="https://tools.suckless.org/slock"
+pkgver=20220619.2d871eb
+pkgrel=1
+pkgdesc='Simple X display locker'
+url='http://tools.suckless.org/slock'
+arch=('any')
 license=('MIT')
-depends=('libxext' 'libxrandr')
-source=("https://dl.suckless.org/tools/$pkgname-$pkgver.tar.gz"
-	"backspace.patch"
-	"my.patch")
-sha256sums=('b53849dbc60109a987d7a49b8da197305c29307fd74c12dc18af0d3044392e6a'
-            '38041869ef4e3aef60dec64c2ee2c297f7d2e5fb873b748634fdfbcfc3834a97'
-            '58269420d1347fdf293925a654e1cca64513607822d232815b01eeb44daa2781')
+makedepends=('git')
+depends=('libxrandr')
+source=("git+https://github.com/arieboven/slock"
+	'config.h')
+sha256sums=('SKIP'
+            '7cd1488b7a820956ef94d69312fe4584469bb724d29acbc33c9cd7167aef6998')
+
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git log -1 --format='%cd.%h' --date=short | tr -d -
+}
 
 prepare() {
-  cd "$srcdir/slock-$pkgver"
-  sed -i 's|static const char \*group = "nogroup";|static const char *group = "nobody";|' config.def.h
-  patch config.def.h ../my.patch
-  sed -ri 's/((CPP|C|LD)FLAGS) =/\1 +=/g' config.mk
-  patch -p1 <../backspace.patch
+	cp config.h "${srcdir}/${pkgname}"
+	cd "${srcdir}/${pkgname}"
+	sed \
+		-e 's/CPPFLAGS =/CPPFLAGS +=/g' \
+		-e 's/CFLAGS =/CFLAGS +=/g' \
+		-e 's/LDFLAGS =/LDFLAGS +=/g' \
+		-i config.mk
 }
 
 build() {
-  cd "$srcdir/slock-$pkgver"
-  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+	cd "${srcdir}/${pkgname}"
+	make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
 }
 
 package() {
-  cd "$srcdir/slock-$pkgver"
-  make PREFIX=/usr DESTDIR="$pkgdir" install
-  install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	cd "${srcdir}/${pkgname}"
+	make PREFIX=/usr DESTDIR="${pkgdir}" install
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

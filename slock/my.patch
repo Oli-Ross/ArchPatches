@@ -1,8 +1,0 @@
-6,8c6,8
-< 	[INIT] =   "black",     /* after initialization */
-< 	[INPUT] =  "#005577",   /* during input */
-< 	[FAILED] = "#CC3333",   /* wrong password */
----
->     [INIT] = "#002b36",  /* after initialization */
->     [INPUT] = "#cb4b16",  /* during input */
->     [FAILED] = "#dc322f", /* wrong password */
