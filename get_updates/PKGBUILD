@@ -1,0 +1,16 @@
+# Maintainer: Lou Roß <mail@oliver-ross.at>
+
+pkgname=(count_updates_on_startup)
+pkgver=0.1
+pkgrel=1
+pkgdesc='Check available updates after network becomes available.'
+arch=('x86_64')
+license=('AGPL3')
+source=("count_updates.service")
+sha256sums=('a255b2477123b155183c7d5d4632ca7814c961516160e13ee213dbc54ed5658c')
+
+package() {
+  pkgdesc='Check available updates after network becomes available.'
+  install -D -m0644 $srcdir/count_updates.service $pkgdir/etc/systemd/system/count_updates.service
+}
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=Check if updates are available
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'checkupdates | wc -l > /tmp/pacman_updates'
+
+[Install]
+WantedBy=multi-user.target
