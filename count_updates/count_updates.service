@@ -3,8 +3,10 @@ Description=Check if updates are available
 After=network.target
 
 [Service]
+User=me
+Group=me
 Type=oneshot
-ExecStart=/bin/bash -c 'checkupdates | wc -l > /tmp/pacman_updates'
+ExecStart=/usr/bin/count_updates.sh
 
 [Install]
 WantedBy=multi-user.target
