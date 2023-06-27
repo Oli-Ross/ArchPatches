@@ -9,7 +9,7 @@ license=('AGPL3')
 source=("count_updates.service"
 	"count_updates.sh")
 sha256sums=('07139db3a99fce95cf1e7adfa92501666c2dd3df27812254232190302e97d7c1'
-            'c42f24037bd8b54c8f696849bae3af366d261c42eaab0d3a256f9c041b50921a')
+            '30937597775eae7bcdba39bc4c4f98a1fcf7e0cf9f36cde0870fd0b90a445e38')
 
 package() {
   pkgdesc='Check available updates after network becomes available.'
