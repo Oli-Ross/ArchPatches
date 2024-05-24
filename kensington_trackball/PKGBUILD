@@ -7,7 +7,7 @@ pkgdesc='Remap Kensington Expert mouse buttons'
 arch=('x86_64')
 license=('AGPL3')
 source=("50_kensington_trackball.conf")
-sha256sums=('20081b0f34c412852465e6f82c072e058d0100eb5909c9b53d3a1c186ba98e9e')
+sha256sums=('6a66b75adf84c0179baaba8ee85adf74d3d63b6b800f86cc5d401fcd2b84bdec')
 
 package() {
   pkgdesc='Install configuration for Kensington Expert Trackballs.'
