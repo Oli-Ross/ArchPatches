@@ -7,25 +7,25 @@
 
 pkgbase=mupdf
 pkgname=(libmupdf mupdf mupdf-gl mupdf-tools)
-pkgver=1.20.3
-pkgrel=2
+pkgver=1.24.2
+pkgrel=1
 pkgdesc='Lightweight PDF and XPS viewer'
 arch=('x86_64')
 url='https://mupdf.com/'
 license=('AGPL3')
-makedepends=('desktop-file-utils' 'freetype2' 'freeglut' 'glu' 'harfbuzz'
+makedepends=('desktop-file-utils' 'freetype2' 'freeglut' 'glu' 'harfbuzz' 'zlib'
              'jbig2dec' 'libjpeg' 'mesa-libgl' 'openjpeg2' 'libxext'
              'gumbo-parser')
 # we need static libs for zathura-pdf-mupdf
 options=('staticlibs')
-source=("https://mupdf.com/downloads/archive/mupdf-${pkgver/_/}-source.tar.zst"
+source=("https://mupdf.com/downloads/archive/mupdf-${pkgver/_/}-source.tar.gz"
         'mupdf.desktop'
         'mupdf.xpm'
 	'my.patch')
-sha256sums=('108c4ad87d5cdd3ad47a3a872acdf101693283442469629dabb7631f1f3a0b3f'
+sha256sums=('7fbced6d6024608661d773b93990119db7eb2483f0d3e28855eadef9ca9a8686'
             'ccff66979249bd4ab4ba8918660f194eb90eb0ae231b16e36a6cecdcf471883f'
             'a435f44425f5432c074dee745d8fbaeb879038ec1f1ec64f037c74662f09aca8'
-            '75f900c2bd8ee90e3bfa8d239d642395aa2d72037f0424f513b6bf854d238a8f')
+            '8d9d78bf627703a8c616012a577602920326399ea41b409a0b3d18a40b286969')
 
 prepare() {
   cd $pkgbase-${pkgver/_/}-source
@@ -48,7 +48,7 @@ build() {
   export CFLAGS+=' -ffat-lto-objects'
 
   cd $pkgbase-${pkgver/_/}-source
-  make build=release libs apps
+  make shared=yes build=release libs apps
 }
 
 package_libmupdf() {
@@ -56,7 +56,7 @@ package_libmupdf() {
 
   cd $pkgbase-${pkgver/_/}-source
 
-  make build=release prefix="$pkgdir"/usr install
+  make shared=yes build=release prefix="$pkgdir"/usr install
 
   rm -rf "$pkgdir"/usr/{bin,share/man}
   mv "$pkgdir"/usr/share/doc/mupdf "$pkgdir"/usr/share/doc/libmupdf
@@ -67,12 +67,11 @@ package_libmupdf() {
 
 package_mupdf() {
   pkgdesc='Lightweight PDF and XPS viewer'
-  depends=('desktop-file-utils' 'freetype2' 'harfbuzz' 'jbig2dec'
-           'libjpeg' 'openjpeg2' 'openssl' 'libxext' 'gumbo-parser')
+  depends=('desktop-file-utils' 'libmupdf' 'libxext')
 
   cd $pkgbase-${pkgver/_/}-source
 
-  install -D -m0755 build/release/mupdf-x11 "$pkgdir"/usr/bin/mupdf
+  install -D -m0755 build/shared-release/mupdf-x11 "$pkgdir"/usr/bin/mupdf
 
   install -D -m0644 docs/man/mupdf.1 "$pkgdir"/usr/share/man/man1/mupdf.1
 
@@ -87,12 +86,11 @@ package_mupdf-gl() {
   pkgdesc='Lightweight PDF and XPS viewer with OpenGL backend'
   conflicts=('mupdf')
   provides=("mupdf=${pkgver}")
-  depends=('desktop-file-utils' 'freetype2' 'freeglut' 'glu' 'harfbuzz' 'jbig2dec'
-           'libjpeg' 'openjpeg2' 'openssl' 'gumbo-parser')
+  depends=('desktop-file-utils' 'glut' 'libgl' 'libmupdf' 'openssl')
 
   cd $pkgbase-${pkgver/_/}-source
 
-  install -D -m0755 build/release/mupdf-gl "$pkgdir"/usr/bin/mupdf
+  install -D -m0755 build/shared-release/mupdf-gl "$pkgdir"/usr/bin/mupdf
 
   install -D -m0644 docs/man/mupdf.1 "$pkgdir"/usr/share/man/man1/mupdf.1
 
@@ -105,14 +103,12 @@ package_mupdf-gl() {
 
 package_mupdf-tools() {
   pkgdesc='Tools for Lightweight PDF and XPS viewer'
-  depends=('mupdf')
-  depends=('freetype2' 'jbig2dec' 'libjpeg' 'openjpeg2' 'harfbuzz' 'openssl'
-           'gumbo-parser')
+  depends=('libmupdf')
 
   cd $pkgbase-${pkgver/_/}-source
 
-  install -D -m0755 build/release/mutool "$pkgdir"/usr/bin/mutool
-  install -D -m0755 build/release/muraster "$pkgdir"/usr/bin/muraster
+  install -D -m0755 build/shared-release/mutool "$pkgdir"/usr/bin/mutool
+  install -D -m0755 build/shared-release/muraster "$pkgdir"/usr/bin/muraster
 
   install -D -m0644 docs/man/mutool.1 "$pkgdir"/usr/share/man/man1/mutool.1
 
